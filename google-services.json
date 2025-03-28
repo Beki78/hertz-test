@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "685066545626",
+    "project_id": "hertzv1",
+    "storage_bucket": "hertzv1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:685066545626:android:e9cdffe5549c16e48838e3",
+        "android_client_info": {
+          "package_name": "com.beki1234.hertz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCheqJy71j8pqpapyq-m9Cp-Imr7942rBU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
