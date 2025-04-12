@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { clearCache } from "@/scripts/ClearCache";
 import { Ionicons } from "@expo/vector-icons";
 
+
 const Data_and_Storage = () => {
   const theme = useSelector((state: RootState) => state.theme);
 
@@ -50,7 +51,7 @@ const Data_and_Storage = () => {
           </Text>
 
           {/* auto data Setting */}
-          <View className="flex-row justify-between items-center ">
+          <View className="flex-row justify-between items-center">
             <View className="flex-row items-center gap-2 my-4">
               <Text
                 className={`${textColor} text-lg`}

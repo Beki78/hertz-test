@@ -1,0 +1,1 @@
+export const BaseUrl = "http://192.168.173.103:4000/graphql/";

@@ -8,7 +8,7 @@ import {
   Ionicons,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 
@@ -18,6 +18,12 @@ const Privacy = () => {
   const backgroundColor = theme.theme === "dark" ? "bg-black" : "bg-white";
   const textColor = theme.theme === "dark" ? "text-white" : "text-black";
   const iconColor = theme.theme === "dark" ? "white" : "black";
+
+  const router = useRouter();
+
+  const handleActiveSessions = () => {
+    router.push("/session/sessionScreen");
+  };
 
   return (
     <>
@@ -77,7 +83,7 @@ const Privacy = () => {
           </TouchableOpacity>
           <View className="h-[.1rem] w-full bg-gray-400"></View>
 
-          <TouchableOpacity className="flex-row justify-between items-center my-4">
+          <TouchableOpacity className="flex-row justify-between items-center my-4" onPress={handleActiveSessions}>
             <View className="flex-row items-center gap-2">
               <Feather name="smartphone" size={24} color={iconColor} />
               <Text

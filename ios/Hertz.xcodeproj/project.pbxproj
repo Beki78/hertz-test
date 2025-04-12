@@ -14,7 +14,7 @@
 		96905EF65AED1B983A6B3ABC /* libPods-Hertz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEBF8E8E6FB1BC6CAF49B5 /* libPods-Hertz.a */; };
 		B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
-		CE44D056291D4037BA97E010 /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AEF238167941DA9DD4E73E /* noop-file.swift */; };
+		DE095D7A626F4669818E7DC0 /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114B3BC9838141AF911C89BD /* noop-file.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,8 +31,8 @@
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-Hertz/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
-		73AEF238167941DA9DD4E73E /* noop-file.swift */ = {isa = PBXFileReference; name = "noop-file.swift"; path = "Hertz/noop-file.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
-		E60D1176042746F7A28D0BF4 /* Hertz-Bridging-Header.h */ = {isa = PBXFileReference; name = "Hertz-Bridging-Header.h"; path = "Hertz/Hertz-Bridging-Header.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		114B3BC9838141AF911C89BD /* noop-file.swift */ = {isa = PBXFileReference; name = "noop-file.swift"; path = "Hertz/noop-file.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
+		BAABEA1F9ADE4A988B122398 /* Hertz-Bridging-Header.h */ = {isa = PBXFileReference; name = "Hertz-Bridging-Header.h"; path = "Hertz/Hertz-Bridging-Header.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,8 +57,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
-				73AEF238167941DA9DD4E73E /* noop-file.swift */,
-				E60D1176042746F7A28D0BF4 /* Hertz-Bridging-Header.h */,
+				114B3BC9838141AF911C89BD /* noop-file.swift */,
+				BAABEA1F9ADE4A988B122398 /* Hertz-Bridging-Header.h */,
 			);
 			name = Hertz;
 			sourceTree = "<group>";
@@ -198,7 +198,7 @@
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
-				5B100E2550274445831F7FBA /* Hertz-Bridging-Header.h in Resources */,
+				68CD36D63FB54C9CBDC10F86 /* Hertz-Bridging-Header.h in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,7 +274,7 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */,
-				CE44D056291D4037BA97E010 /* noop-file.swift in Sources */,
+				DE095D7A626F4669818E7DC0 /* noop-file.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

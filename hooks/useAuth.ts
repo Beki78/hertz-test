@@ -4,6 +4,7 @@ import { useRouter } from "expo-router";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { useLoginMutation } from "@/api/authApi";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function useAuth() {
   const [username, setUsername] = useState("palmer");
@@ -21,12 +22,26 @@ export default function useAuth() {
       const result = await login({ username, password }).unwrap();
       console.log("Login Result:", result);
 
+      // Extract the token from the response
+      const token = result?.data?.login?.token;
+
+      if (!token) {
+        throw new Error("No token received from server.");
+      }
+
+      // Store the token in AsyncStorage
+      await AsyncStorage.setItem("token", token);
+
+      // Update the Redux state with the token
+
       if (isVibrationEnabled) {
         Vibration.vibrate([50, 100, 50]);
       }
 
-      router.push("/settings");
+      // Navigate to the main screen
+      router.push("/main/main");
     } catch (error: any) {
+      console.error("Login failed:", error);
       Alert.alert("Login Failed", error?.message || "Something went wrong!");
     }
   };

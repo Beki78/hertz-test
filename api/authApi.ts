@@ -1,10 +1,11 @@
+import { BaseUrl } from "@/constants/BaseURL";
 import { RootState } from "@/store/store";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const graphqlApi = createApi({
   reducerPath: "graphqlApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://192.168.157.103:4000/graphql/",
+    baseUrl: BaseUrl,
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.token;
       if (token) {

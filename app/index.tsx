@@ -146,7 +146,7 @@ export default function HomeScreen() {
           Home Page
         </Text>
         <Button
-          title="Go to Settings"
+          title="Go to Signin"
           onPress={() => router.push("/(auth)/signin")}
         />
         <TouchableOpacity

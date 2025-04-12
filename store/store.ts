@@ -9,6 +9,9 @@ import authReducer from "./auth/authSlice";
 import { imageApi } from "@/api/fetchApi";
 import { loginApi } from "@/api/loginApi";
 import { graphqlApi } from "@/api/authApi";
+import { uploadApi } from "@/api/uploadApi";
+import { setStatusBarHidden } from "expo-status-bar";
+import { sessionApi } from "@/api/sessionApi";
 
 export const store = configureStore({
   reducer: {
@@ -22,12 +25,16 @@ export const store = configureStore({
     [imageApi.reducerPath]: imageApi.reducer,
     [loginApi.reducerPath]: loginApi.reducer,
     [graphqlApi.reducerPath]: graphqlApi.reducer,
+    [uploadApi.reducerPath]: uploadApi.reducer,
+    [sessionApi.reducerPath]: sessionApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       imageApi.middleware,
       graphqlApi.middleware,
-      loginApi.middleware
+      loginApi.middleware,
+      uploadApi.middleware,
+      sessionApi.middleware
     ),
 });
 
