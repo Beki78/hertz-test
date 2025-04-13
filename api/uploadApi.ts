@@ -40,7 +40,7 @@ export const uploadApi = createApi({
           type: "image/jpeg",
         } as any;
 
-        formData.append("1", file);
+        formData.append("1", file); 
 
         return {
           url: "/graphql",
