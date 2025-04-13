@@ -12,6 +12,7 @@ import { graphqlApi } from "@/api/authApi";
 import { uploadApi } from "@/api/uploadApi";
 import { setStatusBarHidden } from "expo-status-bar";
 import { sessionApi } from "@/api/sessionApi";
+import { profileApi } from "@/api/profileApi";
 
 export const store = configureStore({
   reducer: {
@@ -27,6 +28,7 @@ export const store = configureStore({
     [graphqlApi.reducerPath]: graphqlApi.reducer,
     [uploadApi.reducerPath]: uploadApi.reducer,
     [sessionApi.reducerPath]: sessionApi.reducer,
+    [profileApi.reducerPath]: profileApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -34,7 +36,8 @@ export const store = configureStore({
       graphqlApi.middleware,
       loginApi.middleware,
       uploadApi.middleware,
-      sessionApi.middleware
+      sessionApi.middleware,
+      profileApi.middleware,
     ),
 });
 

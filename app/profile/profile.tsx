@@ -8,15 +8,16 @@ import {
   Alert,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import { useUploadProfilePictureMutation } from "@/api/uploadApi";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import Header from "@/components/Header";
+import { useUploadProfilePictureMutation } from "@/api/uploadApi";
+import { useGetUserProfileQuery } from "@/api/profileApi";
 
 const Profile = () => {
   const [profile, setProfile] = useState({
-    username: "johndoe",
-    name: "John Doe",
-    email: "johndoe@example.com",
+    username: "",
+    name: "",
+    email: "",
+    phoneNumber: "",
     status: true,
     image: null,
   });
@@ -24,21 +25,33 @@ const Profile = () => {
   const [uploadProfilePicture, { isLoading }] =
     useUploadProfilePictureMutation();
 
-  useEffect(() => {
-    const fetchToken = async () => {
-      try {
-        const token = await AsyncStorage.getItem("token");
-        console.log("Token from AsyncStorage:", token);
-        if (!token) {
-          console.warn("No token found in AsyncStorage!");
-        }
-      } catch (error) {
-        console.error("Error retrieving token:", error);
-      }
-    };
+  const {
+    data: userProfile,
+    isLoading: isProfileLoading,
+    error: profileError,
+  } = useGetUserProfileQuery({});
 
-    fetchToken();
-  }, []);
+  useEffect(() => {
+    console.log("Fetched user profile:", userProfile);
+
+    if (userProfile?.data?.user) {
+      const userData = userProfile.data.user;
+
+      setProfile((prevProfile) => ({
+        ...prevProfile,
+        username: userData.username || "N/A",
+        name: userData.name || "N/A",
+        email: userData.email || "N/A",
+        phoneNumber: userData.phoneNumber || "N/A",
+        image: userData.picture || null,
+      }));
+    }
+
+    if (profileError) {
+      console.error("Error fetching user profile:", profileError);
+      Alert.alert("Error", "Failed to fetch user profile.");
+    }
+  }, [userProfile, profileError]);
 
   const pickImage = async () => {
     const permissionResult =
@@ -63,7 +76,7 @@ const Profile = () => {
 
     try {
       const response = await uploadProfilePicture(selectedImageUri).unwrap();
-      console.log("Server response:", response); 
+      console.log("Server response:", response);
 
       if (response?.data?.uploadProfilePicture?.url) {
         setProfile((prevProfile) => ({
@@ -84,21 +97,19 @@ const Profile = () => {
     }
   };
 
+  console.log(userProfile);
+
   return (
-    <SafeAreaView className="flex-1 bg-black p-5">
+    <SafeAreaView className="flex-1 bg-black py-5">
       <Header headerTitle="Profile" />
 
       <View className="flex-1 justify-center items-center">
-        {profile.image ? (
-          <Image
-            source={{ uri: profile.image }}
-            className="w-32 h-32 rounded-full"
-          />
-        ) : (
-          <View className="w-32 h-32 bg-gray-600 rounded-full justify-center items-center">
-            <Text className="text-white">No Image</Text>
-          </View>
-        )}
+        <Image
+          source={{
+            uri: `http://192.168.173.103:4000${profile.image}`,
+          }}
+          className="w-32 h-32 rounded-full"
+        />
 
         <Text className="text-white text-xl font-bold mt-4">Profile</Text>
         <View className="bg-gray-800 p-5 rounded-lg mt-4 w-full">
@@ -107,15 +118,13 @@ const Profile = () => {
           </Text>
           <Text className="text-white text-lg">Name: {profile.name}</Text>
           <Text className="text-white text-lg">Email: {profile.email}</Text>
-          <Text className="text-white text-lg">
-            Status: {profile.status ? "Active ✅" : "Inactive ❌"}
-          </Text>
+          <Text className="text-white text-lg">Phone: {profile.phoneNumber}</Text>
         </View>
 
         <TouchableOpacity
           className="bg-blue-600 px-5 py-3 rounded-lg mt-5"
           onPress={pickImage}
-          disabled={isLoading} 
+          disabled={isLoading}
         >
           <Text className="text-white text-lg font-semibold">
             {isLoading ? "Uploading..." : "Upload Image"}

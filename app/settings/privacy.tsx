@@ -1,5 +1,12 @@
-import { View, Text, ScrollView, TouchableOpacity, Switch } from "react-native";
-import React from "react";
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  Switch,
+  Alert,
+} from "react-native";
+import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "@/components/Header";
 import {
@@ -11,18 +18,44 @@ import {
 import { Stack, useRouter } from "expo-router";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import { useUpdateProfileVisibilityMutation } from "@/api/profileApi";
 
 const Privacy = () => {
   const theme = useSelector((state: RootState) => state.theme);
-
   const backgroundColor = theme.theme === "dark" ? "bg-black" : "bg-white";
   const textColor = theme.theme === "dark" ? "text-white" : "text-black";
   const iconColor = theme.theme === "dark" ? "white" : "black";
-
   const router = useRouter();
 
   const handleActiveSessions = () => {
     router.push("/session/sessionScreen");
+  };
+
+  const [isProfileVisible, setIsProfileVisible] = useState({
+    hideUsername: false,
+    hidePhoneNumber: false,
+    hidePicture: false,
+  });
+
+  const [updateVisibility] = useUpdateProfileVisibilityMutation();
+
+  const handleSwitchToggle = async (value: boolean) => {
+    setIsProfileVisible({
+      hideUsername: value,
+      hidePhoneNumber: value,
+      hidePicture: value,
+    });
+
+    try {
+      await updateVisibility({
+        hideUsername: value,
+        hidePhoneNumber: value,
+        hidePicture: value,
+      });
+    } catch (err) {
+      console.error("Failed to update visibility:", err);
+      Alert.alert("Error", "Failed to update visibility.");
+    }
   };
 
   return (
@@ -47,7 +80,15 @@ const Privacy = () => {
                 Show profile image
               </Text>
             </View>
-            <Switch trackColor={{ false: "#293645", true: "#E19F42" }} />
+            <Switch
+              trackColor={{ false: "#293645", true: "#E19F42" }}
+              value={
+                isProfileVisible.hideUsername &&
+                isProfileVisible.hidePhoneNumber &&
+                isProfileVisible.hidePicture
+              }
+              onValueChange={(value) => handleSwitchToggle(value)}
+            />
           </View>
           <View className="h-[.1rem] w-full bg-gray-400"></View>
 
@@ -83,7 +124,10 @@ const Privacy = () => {
           </TouchableOpacity>
           <View className="h-[.1rem] w-full bg-gray-400"></View>
 
-          <TouchableOpacity className="flex-row justify-between items-center my-4" onPress={handleActiveSessions}>
+          <TouchableOpacity
+            className="flex-row justify-between items-center my-4"
+            onPress={handleActiveSessions}
+          >
             <View className="flex-row items-center gap-2">
               <Feather name="smartphone" size={24} color={iconColor} />
               <Text
